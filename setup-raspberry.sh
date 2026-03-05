@@ -88,30 +88,6 @@ echo "✓ xdotool installé"
 echo ""
 echo "Compilation des projets Java..."
 
-# Déterminer classpath pour MG2D
-CP="."
-MG2D_COMPILED=false
-if compgen -G "MG2D*.jar" > /dev/null 2>&1; then
-    CP=".:MG2D*.jar"
-    MG2D_COMPILED=true
-    echo "  ℹ MG2D jar trouvé - ajouté au classpath"
-elif [ -d "MG2D" ]; then
-    CP=".:MG2D"
-    echo "  ℹ Répertoire MG2D trouvé - tentative de compilation des sources..."
-    # Compiler MG2D en premier
-    find MG2D -name "*.java" -print0 | xargs -0 javac -d . 2>/dev/null && {
-        echo "    ✓ MG2D compilé"
-        MG2D_COMPILED=true
-    } || {
-        echo "    ⚠ Erreur compilation MG2D"
-    }
-else
-    echo "  ⚠ ATTENTION: Aucune bibliothèque MG2D trouvée!"
-    echo "     Les jeux Java qui importent MG2D (JavaSpace, Columns, etc.) échoueront à la compilation."
-    echo "     Assurez-vous que MG2D/ (source) ou MG2D.jar existe à la racine."
-    CP="."
-fi
-
 # Compiler les dépendances (javazoom)
 if [ -d "javazoom" ]; then
     echo "  → Compilation de javazoom..."

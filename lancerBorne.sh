@@ -4,13 +4,15 @@ setxkbmap borne
 
 
 cd /home/pi/git/borne_arcade
+
+echo "Installation des dépendances"
+./setup-raspberry.sh
+
 echo "nettoyage des répertoires"
 echo "Veuillez patienter"
 ./clean.sh
 ./compilation.sh
 
-echo "Installation des dépendances"
-./setup-raspberry.sh
 
 echo "Lancement du  Menu"
 echo "Veuillez patienter"
